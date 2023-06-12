@@ -126,88 +126,90 @@ RegisterNumber: 212222230161
 ```
 ### SR Flip-Flop:
 ```
-module SR (s,r,clk,Q,Qbar);
+module srflipflop(s,r,clk,q,qbar);
 input s,r,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
+output q,qbar;
+reg q,qbar;
 always @(posedge clk)
-begin
-	Q=s | ((~r) & Q);
-	Qbar=r  | ((~s)&(Qbar));
+begin 
+q<=s|(~r&q);
+qbar<=r|(~s&~q);
 end
 endmodule
 ```
 
 ### D Flip-Flop:
 ```
-module D (d,clk,qpa,qpr,qprbar);
-input d,qpa,clk;
-output reg qpr,qprbar;
-always@ (posedge clk)
-begin
-	qpr=d;
-	qprbar=~qpr;
+module dflipflop(d,clk,q,qbar);
+input d,clk;
+output q,qbar;
+reg q,qbar;
+always @(posedge clk)
+begin 
+q<=d;
+qbar<=~q;
 end
 endmodule
 ```
 
 ### JK Flip-Flop:
 ```
-module JK (j,k,clk,Q,Qbar);
+module jkflipflop(j,k,clk,q,qbar);
 input j,k,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
+output q,qbar;
+reg q,qbar;
 always @(posedge clk)
-begin
-	Q=((~k)&(Q)) | ((j)&(~Q));
-	Qbar= ((~j)&(~Qbar)) | (k & Qbar);
+begin 
+q<=(j&~q)|(~k&q);
+qbar<=~q;
 end
 endmodule
 ```
 
 ### T Flip-Flop:
 ```
-module T (t,clk,qpa,qpr,qprbar);
-input t,qpa,clk;
-output reg qpr,qprbar;
-always@ (posedge clk)
-begin
-	qpr=(~t)& qpa | (~qpa)& t;
-	qprbar= t& qpa | (~t) & (~qpa);
+module tflipflop(t,clk,q,qbar);
+input t,clk;
+output q,qbar;
+reg q,qbar;
+always @(posedge clk)
+begin 
+q<=(t&~q)|(~t&q);
+qbar<=~q;
 end
 endmodule
 ```
 
 ## RTL LOGIC FOR FLIPFLOPS 
 ### SR Flip flop
-![de5_srf](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/e06117f2-a730-49da-906e-fb68c4cf40d6)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/775d98a5-831f-42c5-b4d3-a6a7e77d3aea)
 
 ### D-Flip flop
-![de5tf](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/ec98afee-c59a-4132-969f-6747747a2920)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/e17f1434-2cc2-4a39-9706-44d6d0f76312)
 
 ### JK Flip flop
-![de5jkf](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/23e60828-8846-422a-97a9-40825f2aab14)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/8441d2ff-a641-405c-994a-731d5156da43)
 
 ### T flip flop
-![de5df](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/c6e0ed0d-b84b-4761-85fa-3b1ebdf36356)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/84d5cfeb-9b6c-431e-9cd8-dc01ec8379b9)
 
 
 ## TIMING DIGRAMS FOR FLIP FLOPS 
 ### SR flip flop
-![de5srtime](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/05e920f8-6052-4919-8d79-9c9547f58c48)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/514a0d37-9673-4051-8081-feacd86ea317)
+
 
 ### D Flip flop
-![de5dftime](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/d014f8d1-3acc-42d0-8acc-933211cb3706)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/18feb3cb-3fca-481d-bee4-cc45e6048052)
+
 
 ### JK flip flop
-![de5jktime](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/b23a6bb5-e13d-4ec5-97c9-c597d630877a)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/ead0b2f6-3066-4408-8abf-23d02bc2ecad)
+
 
 ### T flip flop
-![de5dfime](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/16a82186-03d9-4e43-9c12-ffa67805d36a)
+![image](https://github.com/Thirukaalathessvarar-S/Experiment--05-Implementation-of-flipflops-using-verilog/assets/121166390/a01fe647-4b10-409a-a042-1fd748ec7170)
+
 
 ### RESULTS 
 Thus ,all the flipflops using verilog and validating their functionality using their functional tables are successfully executed.
